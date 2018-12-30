@@ -1,0 +1,5 @@
+AbsoluteLayout 
+	http://www.runoob.com/w3cnote/android-tutorial-absolutelayout.html
+	
+GroupLayout
+	https://blog.csdn.net/xietansheng/article/details/72862660

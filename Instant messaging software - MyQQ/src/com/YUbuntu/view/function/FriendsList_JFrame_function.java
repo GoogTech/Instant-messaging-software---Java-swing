@@ -1,5 +1,7 @@
 package com.YUbuntu.view.function;
 
+import java.awt.event.ActionEvent;
+
 /**
  * 
  * @Project Instant messaging software - QQ
@@ -11,5 +13,27 @@ package com.YUbuntu.view.function;
  */
 public interface FriendsList_JFrame_function
 {
+	/**
+	 * 
+	 * @Title Interface
+	 * @Description The interface of adding new friend.
+	 * @param Performed action
+	 * @return void
+	 * @date Dec 31, 2018-9:31:56 AM
+	 * @throws no
+	 *
+	 */
+	void Interface_AddFriend(ActionEvent e);
 	
+	/**
+	 * 
+	 * @Title Interface
+	 * @Description The interface of personal information.
+	 * @param Performed action
+	 * @return void
+	 * @date Dec 31, 2018-9:38:21 AM
+	 * @throws no
+	 *
+	 */
+	void Interface_PersonalInformation(ActionEvent e);
 }

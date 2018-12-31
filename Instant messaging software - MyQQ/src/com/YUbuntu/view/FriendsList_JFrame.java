@@ -2,20 +2,24 @@ package com.YUbuntu.view;
 
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
+import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
-import javax.swing.JFrame;
-import javax.swing.JPanel;
-import javax.swing.border.EmptyBorder;
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
-import javax.swing.JMenuBar;
-import javax.swing.JMenu;
-import javax.swing.JMenuItem;
-import java.awt.Font;
-import javax.swing.JLabel;
 import javax.swing.ImageIcon;
-import javax.swing.LayoutStyle.ComponentPlacement;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JMenu;
+import javax.swing.JMenuBar;
+import javax.swing.JMenuItem;
+import javax.swing.JPanel;
 import javax.swing.JTabbedPane;
+import javax.swing.LayoutStyle.ComponentPlacement;
+import javax.swing.border.EmptyBorder;
+
+import com.YUbuntu.view.function.FriendsList_JFrame_function;
 
 /**
  * 
@@ -26,7 +30,7 @@ import javax.swing.JTabbedPane;
  * @Date Dec 30, 2018-5:33:43 PM
  * @version 1.0
  */
-public class FriendsList_JFrame extends JFrame
+public class FriendsList_JFrame extends JFrame implements FriendsList_JFrame_function
 {
 
 	private JPanel contentPane;
@@ -69,6 +73,16 @@ public class FriendsList_JFrame extends JFrame
 		mnSettings.setFont(new Font("Consolas", Font.PLAIN, 11));
 		menuBar.add(mnSettings);
 		
+		JMenuItem PersonalInformation_JMenuItem = new JMenuItem("Personal information");
+		PersonalInformation_JMenuItem.addActionListener(new ActionListener() 
+		{
+			public void actionPerformed(ActionEvent e) 
+			{
+				Interface_PersonalInformation(e);
+			}
+		});
+		mnSettings.add(PersonalInformation_JMenuItem);
+		
 		JMenuItem mntmChangePassword = new JMenuItem("Change password");
 		mnSettings.add(mntmChangePassword);
 		
@@ -79,8 +93,15 @@ public class FriendsList_JFrame extends JFrame
 		mnFunctions.setFont(new Font("Consolas", Font.PLAIN, 11));
 		menuBar.add(mnFunctions);
 		
-		JMenuItem mntmAddFriend = new JMenuItem("Add friend");
-		mnFunctions.add(mntmAddFriend);
+		JMenuItem AddFriend_JMenuItem = new JMenuItem("Add friend");
+		AddFriend_JMenuItem.addActionListener(new ActionListener() 
+		{
+			public void actionPerformed(ActionEvent e) 
+			{
+				Interface_AddFriend(e);
+			}
+		});
+		mnFunctions.add(AddFriend_JMenuItem);
 		
 		JMenuItem mntmFindFriend = new JMenuItem("Find friend");
 		mnFunctions.add(mntmFindFriend);
@@ -173,5 +194,37 @@ public class FriendsList_JFrame extends JFrame
 		label.setIcon(new ImageIcon(FriendsList_JFrame.class.getResource("/Icon/The portrait.png")));
 		panel.add(label, BorderLayout.CENTER);
 		contentPane.setLayout(gl_contentPane);
+	}
+	
+	/**
+	 * 
+	 * @Title Interface
+	 * @Description The interface of personal information.
+	 * @param Performed action
+	 * @return void
+	 * @date Dec 31, 2018-9:36:39 AM
+	 * @throws no
+	 *
+	 */
+	public void Interface_PersonalInformation(ActionEvent e)
+	{
+		PersonalInformation_JFrame userPersonalInformation_JFrame = new PersonalInformation_JFrame();
+		userPersonalInformation_JFrame.setVisible(true);
+	}
+
+	/**
+	 * 
+	 * @Title Interface
+	 * @Description The interface of adding new friend.
+	 * @param Performed action
+	 * @return void
+	 * @date Dec 31, 2018-9:28:50 AM
+	 * @throws no
+	 *
+	 */
+	public void Interface_AddFriend(ActionEvent e)
+	{
+		AddFriend_JFrame addFriend_JFrame = new AddFriend_JFrame();
+		addFriend_JFrame.setVisible(true);
 	}
 }

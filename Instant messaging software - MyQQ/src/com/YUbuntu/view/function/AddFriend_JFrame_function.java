@@ -6,10 +6,10 @@ package com.YUbuntu.view.function;
  * @Package com.YUbuntu.view.function
  * @Description Extract the panel functionality into the interface.
  * @Author #YUbuntu
- * @Date Dec 30, 20181-0:04:34 PM
+ * @Date Dec 31, 2018-9:13:42 AM
  * @version 1.0
  */
-public interface UserPersonalInformation_JFrame_function
+public interface AddFriend_JFrame_function
 {
-	
+
 }

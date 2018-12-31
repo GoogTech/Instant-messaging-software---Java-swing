@@ -28,7 +28,7 @@ import javax.swing.border.TitledBorder;
  * @Date Dec 30, 2018-10:04:41 PM
  * @version 1.0
  */
-public class UserPersonalInformation_JFrame extends JFrame
+public class PersonalInformation_JFrame extends JFrame
 {
 
 	private JPanel UserPersonalInformation_ContentPane;
@@ -50,7 +50,7 @@ public class UserPersonalInformation_JFrame extends JFrame
 			{
 				try
 				{
-					UserPersonalInformation_JFrame frame = new UserPersonalInformation_JFrame();
+					PersonalInformation_JFrame frame = new PersonalInformation_JFrame();
 					frame.setVisible(true);
 				} catch (Exception e)
 				{
@@ -63,7 +63,7 @@ public class UserPersonalInformation_JFrame extends JFrame
 	/**
 	 * Create the frame.
 	 */
-	public UserPersonalInformation_JFrame()
+	public PersonalInformation_JFrame()
 	{
 		setResizable(false);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -74,7 +74,7 @@ public class UserPersonalInformation_JFrame extends JFrame
 		UserPersonalInformation_ContentPane.setLayout(null);
 		
 		JLabel UserPortrait_JLabel = new JLabel("");
-		UserPortrait_JLabel.setIcon(new ImageIcon(UserPersonalInformation_JFrame.class.getResource("/Icon/The portrait.png")));
+		UserPortrait_JLabel.setIcon(new ImageIcon(PersonalInformation_JFrame.class.getResource("/Icon/The portrait.png")));
 		UserPortrait_JLabel.setBounds(10, 10, 71, 79);
 		UserPersonalInformation_ContentPane.add(UserPortrait_JLabel);
 		

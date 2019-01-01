@@ -1,24 +1,22 @@
 package com.YUbuntu.view;
 
-import java.awt.BorderLayout;
 import java.awt.EventQueue;
-
-import javax.swing.JFrame;
-import javax.swing.JPanel;
-import javax.swing.border.EmptyBorder;
-
-import com.YUbuntu.view.function.Login_JFrame_function;
+import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
+import javax.swing.JButton;
+import javax.swing.JFrame;
 import javax.swing.JLabel;
-import java.awt.Font;
+import javax.swing.JPanel;
+import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 import javax.swing.LayoutStyle.ComponentPlacement;
-import javax.swing.JButton;
-import javax.swing.JPasswordField;
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
+import javax.swing.border.EmptyBorder;
+
+import com.YUbuntu.view.function.Login_JFrame_function;
 
 /**
  * 
@@ -73,7 +71,7 @@ public class Login_JFrame extends JFrame implements Login_JFrame_function
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		
-		JLabel lblEmail = new JLabel("Email/Telephone");
+		JLabel lblEmail = new JLabel("User name");
 		lblEmail.setFont(new Font("Consolas", Font.PLAIN, 13));
 		
 		UserName_TextField = new JTextField();
@@ -109,14 +107,16 @@ public class Login_JFrame extends JFrame implements Login_JFrame_function
 						.addGroup(gl_contentPane.createSequentialGroup()
 							.addGap(50)
 							.addComponent(Login_JButton, GroupLayout.PREFERRED_SIZE, 84, GroupLayout.PREFERRED_SIZE)))
-					.addPreferredGap(ComponentPlacement.RELATED)
-					.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING, false)
-						.addComponent(UserName_TextField, GroupLayout.DEFAULT_SIZE, 162, Short.MAX_VALUE)
+					.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
 						.addGroup(gl_contentPane.createSequentialGroup()
-							.addGap(47)
-							.addComponent(Register_JButton))
-						.addComponent(UserPassword_PasswordField))
-					.addContainerGap(52, Short.MAX_VALUE))
+							.addPreferredGap(ComponentPlacement.RELATED)
+							.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING, false)
+								.addComponent(UserName_TextField, GroupLayout.DEFAULT_SIZE, 162, Short.MAX_VALUE)
+								.addComponent(UserPassword_PasswordField)))
+						.addGroup(gl_contentPane.createSequentialGroup()
+							.addGap(61)
+							.addComponent(Register_JButton)))
+					.addContainerGap(58, Short.MAX_VALUE))
 		);
 		gl_contentPane.setVerticalGroup(
 			gl_contentPane.createParallelGroup(Alignment.LEADING)
@@ -129,10 +129,10 @@ public class Login_JFrame extends JFrame implements Login_JFrame_function
 					.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE)
 						.addComponent(lblPassword)
 						.addComponent(UserPassword_PasswordField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-					.addPreferredGap(ComponentPlacement.RELATED, 42, Short.MAX_VALUE)
+					.addPreferredGap(ComponentPlacement.RELATED, 34, Short.MAX_VALUE)
 					.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE)
-						.addComponent(Register_JButton)
-						.addComponent(Login_JButton))
+						.addComponent(Login_JButton)
+						.addComponent(Register_JButton))
 					.addGap(24))
 		);
 		contentPane.setLayout(gl_contentPane);

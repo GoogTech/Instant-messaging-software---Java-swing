@@ -33,7 +33,6 @@ public class Register_JFrame extends JFrame implements Register_JFrame_function
 
 	private JPanel contentPane;
 	private JTextField TelephoneOrEmail_TextField;
-	private JTextField Verification_TextField;
 	private JPasswordField Password_PasswordField;
 	private JPasswordField ConfirmPassword_PasswordField;
 
@@ -66,16 +65,13 @@ public class Register_JFrame extends JFrame implements Register_JFrame_function
 		setResizable(false);
 		setAlwaysOnTop(true);//Set the User register interface always on the top.
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 428, 317);
+		setBounds(100, 100, 437, 266);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		
-		JLabel lblTelephoneemail = new JLabel("Telephone/Email");
+		JLabel lblTelephoneemail = new JLabel("User name");
 		lblTelephoneemail.setFont(new Font("Consolas", Font.PLAIN, 13));
-		
-		JLabel lblFffff = new JLabel("Verification code");
-		lblFffff.setFont(new Font("Consolas", Font.PLAIN, 13));
 		
 		JLabel lblPassword = new JLabel("Password");
 		lblPassword.setFont(new Font("Consolas", Font.PLAIN, 13));
@@ -86,10 +82,6 @@ public class Register_JFrame extends JFrame implements Register_JFrame_function
 		TelephoneOrEmail_TextField = new JTextField();
 		TelephoneOrEmail_TextField.setFont(new Font("SimSun", Font.BOLD, 12));
 		TelephoneOrEmail_TextField.setColumns(10);
-		
-		Verification_TextField = new JTextField();
-		Verification_TextField.setFont(new Font("SimSun", Font.BOLD, 12));
-		Verification_TextField.setColumns(10);
 		
 		Password_PasswordField = new JPasswordField();
 		
@@ -112,28 +104,28 @@ public class Register_JFrame extends JFrame implements Register_JFrame_function
 			gl_contentPane.createParallelGroup(Alignment.LEADING)
 				.addGroup(gl_contentPane.createSequentialGroup()
 					.addGap(30)
-					.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING, false)
-						.addGroup(gl_contentPane.createSequentialGroup()
-							.addComponent(lblTelephoneemail)
-							.addPreferredGap(ComponentPlacement.RELATED, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-							.addComponent(TelephoneOrEmail_TextField, GroupLayout.PREFERRED_SIZE, 181, GroupLayout.PREFERRED_SIZE))
+					.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
 						.addGroup(gl_contentPane.createSequentialGroup()
 							.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
-								.addComponent(lblFffff)
-								.addComponent(lblPassword)
-								.addGroup(gl_contentPane.createParallelGroup(Alignment.TRAILING)
-									.addComponent(ConfirmRegister_JButton)
-									.addComponent(lblConfirmPassword)))
-							.addGap(18)
+								.addComponent(lblConfirmPassword)
+								.addGroup(gl_contentPane.createSequentialGroup()
+									.addGap(51)
+									.addComponent(ConfirmRegister_JButton)))
+							.addPreferredGap(ComponentPlacement.RELATED)
 							.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
-								.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
-									.addComponent(ConfirmPassword_PasswordField)
-									.addComponent(Password_PasswordField, GroupLayout.DEFAULT_SIZE, 183, Short.MAX_VALUE)
-									.addComponent(Verification_TextField))
-								.addGroup(Alignment.TRAILING, gl_contentPane.createSequentialGroup()
-									.addComponent(GoLoginInterface_JButton, GroupLayout.PREFERRED_SIZE, 79, GroupLayout.PREFERRED_SIZE)
-									.addGap(45)))))
-					.addContainerGap(46, Short.MAX_VALUE))
+								.addGroup(gl_contentPane.createSequentialGroup()
+									.addGap(81)
+									.addComponent(GoLoginInterface_JButton, GroupLayout.PREFERRED_SIZE, 79, GroupLayout.PREFERRED_SIZE))
+								.addGroup(gl_contentPane.createSequentialGroup()
+									.addPreferredGap(ComponentPlacement.UNRELATED)
+									.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING, false)
+										.addComponent(ConfirmPassword_PasswordField)
+										.addComponent(Password_PasswordField)
+										.addComponent(TelephoneOrEmail_TextField, GroupLayout.DEFAULT_SIZE, 199, Short.MAX_VALUE))))
+							.addPreferredGap(ComponentPlacement.RELATED, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+						.addComponent(lblPassword)
+						.addComponent(lblTelephoneemail))
+					.addContainerGap())
 		);
 		gl_contentPane.setVerticalGroup(
 			gl_contentPane.createParallelGroup(Alignment.LEADING)
@@ -142,23 +134,19 @@ public class Register_JFrame extends JFrame implements Register_JFrame_function
 					.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE)
 						.addComponent(lblTelephoneemail)
 						.addComponent(TelephoneOrEmail_TextField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-					.addGap(31)
-					.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE)
-						.addComponent(lblFffff)
-						.addComponent(Verification_TextField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-					.addGap(30)
+					.addGap(35)
 					.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE)
 						.addComponent(lblPassword)
 						.addComponent(Password_PasswordField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-					.addGap(28)
+					.addGap(21)
 					.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE)
 						.addComponent(lblConfirmPassword)
 						.addComponent(ConfirmPassword_PasswordField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-					.addGap(33)
+					.addGap(29)
 					.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE)
-						.addComponent(ConfirmRegister_JButton)
-						.addComponent(GoLoginInterface_JButton))
-					.addContainerGap())
+						.addComponent(GoLoginInterface_JButton)
+						.addComponent(ConfirmRegister_JButton))
+					.addGap(59))
 		);
 		contentPane.setLayout(gl_contentPane);
 	}

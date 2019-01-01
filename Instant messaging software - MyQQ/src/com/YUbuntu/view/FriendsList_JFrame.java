@@ -15,6 +15,7 @@ import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 import javax.swing.JTabbedPane;
 import javax.swing.LayoutStyle.ComponentPlacement;
 import javax.swing.border.EmptyBorder;
@@ -64,14 +65,14 @@ public class FriendsList_JFrame extends JFrame implements FriendsList_JFrame_fun
 		setResizable(false);
 		setTitle("\u6625\u6696\u82B1\u5F00\uFF0C\u71D5\u5B50\u5F52\u6765~");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 319, 646);
+		setBounds(100, 100, 322, 646);
 		
-		JMenuBar menuBar = new JMenuBar();
-		setJMenuBar(menuBar);
+		JMenuBar Function_JMenuBar = new JMenuBar();
+		setJMenuBar(Function_JMenuBar);
 		
 		JMenu mnSettings = new JMenu("Settings");
 		mnSettings.setFont(new Font("Consolas", Font.PLAIN, 11));
-		menuBar.add(mnSettings);
+		Function_JMenuBar.add(mnSettings);
 		
 		JMenuItem PersonalInformation_JMenuItem = new JMenuItem("Personal information");
 		PersonalInformation_JMenuItem.addActionListener(new ActionListener() 
@@ -91,7 +92,7 @@ public class FriendsList_JFrame extends JFrame implements FriendsList_JFrame_fun
 		
 		JMenu mnFunctions = new JMenu("Functions");
 		mnFunctions.setFont(new Font("Consolas", Font.PLAIN, 11));
-		menuBar.add(mnFunctions);
+		Function_JMenuBar.add(mnFunctions);
 		
 		JMenuItem AddFriend_JMenuItem = new JMenuItem("Add friend");
 		AddFriend_JMenuItem.addActionListener(new ActionListener() 
@@ -137,31 +138,45 @@ public class FriendsList_JFrame extends JFrame implements FriendsList_JFrame_fun
 					.addComponent(tabbedPane, GroupLayout.PREFERRED_SIZE, 480, GroupLayout.PREFERRED_SIZE))
 		);
 		
-		JPanel Friends_List = new JPanel();
-		tabbedPane.addTab("Friends list", null, Friends_List, null);
-		GroupLayout gl_Friends_List = new GroupLayout(Friends_List);
-		gl_Friends_List.setHorizontalGroup(
-			gl_Friends_List.createParallelGroup(Alignment.LEADING)
-				.addGap(0, 289, Short.MAX_VALUE)
-		);
-		gl_Friends_List.setVerticalGroup(
-			gl_Friends_List.createParallelGroup(Alignment.LEADING)
-				.addGap(0, 450, Short.MAX_VALUE)
-		);
-		Friends_List.setLayout(gl_Friends_List);
+		JPanel FriendsList_JPanel = new JPanel();
+		tabbedPane.addTab("Friends list", null, FriendsList_JPanel, null);
 		
-		JPanel Friends_Blog = new JPanel();
-		tabbedPane.addTab("Friends blog", null, Friends_Blog, null);
-		GroupLayout gl_Friends_Blog = new GroupLayout(Friends_Blog);
-		gl_Friends_Blog.setHorizontalGroup(
-			gl_Friends_Blog.createParallelGroup(Alignment.LEADING)
+		JScrollPane FriendsList_ScrollPane = new JScrollPane();
+		
+		/*------------------------------------------------------------------------------
+		 * Add the friend information panel into FriendsList_ScrollPane(Friends list). |
+		 *------------------------------------------------------------------------------
+		 */
+		FriendsList_ScrollPane.setViewportView(new Firends_JPanel());
+		
+		GroupLayout gl_FriendsList_JPanel = new GroupLayout(FriendsList_JPanel);
+
+		gl_FriendsList_JPanel.setHorizontalGroup(
+			gl_FriendsList_JPanel.createParallelGroup(Alignment.LEADING)
+				.addComponent(FriendsList_ScrollPane, GroupLayout.DEFAULT_SIZE, 289, Short.MAX_VALUE)
+		);
+		gl_FriendsList_JPanel.setVerticalGroup(
+			gl_FriendsList_JPanel.createParallelGroup(Alignment.LEADING)
+				.addGroup(gl_FriendsList_JPanel.createSequentialGroup()
+					.addComponent(FriendsList_ScrollPane, GroupLayout.PREFERRED_SIZE, 448, GroupLayout.PREFERRED_SIZE)
+					.addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+		);
+		FriendsList_JPanel.setLayout(gl_FriendsList_JPanel);
+				
+		
+		
+		JPanel FriendsBlog_JPanel = new JPanel();
+		tabbedPane.addTab("Friends blog", null, FriendsBlog_JPanel, null);
+		GroupLayout gl_FriendsBlog_JPanel = new GroupLayout(FriendsBlog_JPanel);
+		gl_FriendsBlog_JPanel.setHorizontalGroup(
+			gl_FriendsBlog_JPanel.createParallelGroup(Alignment.LEADING)
 				.addGap(0, 289, Short.MAX_VALUE)
 		);
-		gl_Friends_Blog.setVerticalGroup(
-			gl_Friends_Blog.createParallelGroup(Alignment.LEADING)
+		gl_FriendsBlog_JPanel.setVerticalGroup(
+			gl_FriendsBlog_JPanel.createParallelGroup(Alignment.LEADING)
 				.addGap(0, 450, Short.MAX_VALUE)
 		);
-		Friends_Blog.setLayout(gl_Friends_Blog);
+		FriendsBlog_JPanel.setLayout(gl_FriendsBlog_JPanel);
 		
 		JLabel lblyubuntu = new JLabel("#YUbuntu");
 		lblyubuntu.setFont(new Font("Consolas", Font.PLAIN, 18));

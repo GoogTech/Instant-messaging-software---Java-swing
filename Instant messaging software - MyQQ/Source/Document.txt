@@ -3,3 +3,13 @@ AbsoluteLayout
 	
 GroupLayout
 	https://blog.csdn.net/xietansheng/article/details/72862660
+
+解决当关闭子面板时导致主面板一起被关闭的问题：（这个的关闭是指：点击面板的右上角的 'X'）
+	#在子窗口添加一句。
+	setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+	#而不要用下面这句
+	setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+	#补充
+	你是想在用户不点击右上角关闭按钮的情况下，关闭窗口。用dispose();如果是在别处调用，请用子窗口的引用.dispose(); 
+	
+快捷键：Ctrl + o (查看,查找类分层结构)

@@ -1,8 +1,16 @@
 package com.YUbuntu.view;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.EventQueue;
 import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.io.IOException;
+import java.net.DatagramPacket;
+import java.net.DatagramSocket;
+import java.net.InetAddress;
+import java.net.SocketException;
 
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
@@ -13,10 +21,12 @@ import javax.swing.JLabel;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JSplitPane;
 import javax.swing.JTextArea;
+import javax.swing.JTextField;
 import javax.swing.LayoutStyle.ComponentPlacement;
 import javax.swing.border.EmptyBorder;
 
@@ -32,13 +42,23 @@ import javax.swing.border.EmptyBorder;
 public class ChatBox_JFrame extends JFrame
 {
 
+	/*
+	 * Send or receive the message(DatagramPacket)
+	 */
+	private DatagramSocket datagramSocket;
+	
 	private JPanel ChatBox_ContentPane;
+	private JTextField FriendIP_TextField;
+	private JTextArea SendInformation_TextArea;
+	private JTextArea ChatInformation_TextArea;
+	private JTextField FriendPort_TextField;
+	private JLabel MonitoringStatu_JLabel;
 
 	/**
 	 * Launch the application.
 	 */
 	public static void main(String[] args)
-	{
+	{	
 		EventQueue.invokeLater(new Runnable()
 		{
 			public void run()
@@ -47,6 +67,7 @@ public class ChatBox_JFrame extends JFrame
 				{
 					ChatBox_JFrame frame = new ChatBox_JFrame();
 					frame.setVisible(true);
+					
 				} catch (Exception e)
 				{
 					e.printStackTrace();
@@ -54,6 +75,7 @@ public class ChatBox_JFrame extends JFrame
 			}
 		});
 	}
+	
 
 	/**
 	 * Create the frame.
@@ -61,8 +83,13 @@ public class ChatBox_JFrame extends JFrame
 	public ChatBox_JFrame()
 	{
 		setTitle("Chat Box");
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 884, 615);
+		/*
+		 *  !
+		 */
+		//setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+		
+		setBounds(100, 100, 886, 575);
 		ChatBox_ContentPane = new JPanel();
 		ChatBox_ContentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		ChatBox_ContentPane.setLayout(new BorderLayout(0, 0));
@@ -95,17 +122,34 @@ public class ChatBox_JFrame extends JFrame
 		JLabel FriendName_JLabel = new JLabel("Hi,#YUbuntu");
 		FriendName_JLabel.setFont(new Font("Consolas", Font.PLAIN, 18));
 		
-		JLabel FriendSignature_JLabel = new JLabel("Personal signature : As long as i love you ~");
-		FriendSignature_JLabel.setFont(new Font("Consolas", Font.PLAIN, 13));
+		JLabel FriendSignature_JLabel = new JLabel("Friend IP ");
+		FriendSignature_JLabel.setForeground(Color.RED);
+		FriendSignature_JLabel.setFont(new Font("Consolas", Font.BOLD, 14));
+		
+		FriendIP_TextField = new JTextField();
+		FriendIP_TextField.setColumns(10);
+		
+		JLabel lblFriendPort = new JLabel("Friend Port");
+		lblFriendPort.setForeground(Color.RED);
+		lblFriendPort.setFont(new Font("Consolas", Font.BOLD, 14));
+		
+		FriendPort_TextField = new JTextField();
+		FriendPort_TextField.setColumns(10);
 		GroupLayout gl_panel_2 = new GroupLayout(panel_2);
 		gl_panel_2.setHorizontalGroup(
 			gl_panel_2.createParallelGroup(Alignment.LEADING)
 				.addGroup(gl_panel_2.createSequentialGroup()
 					.addContainerGap()
 					.addComponent(FriendName_JLabel)
-					.addGap(32)
+					.addPreferredGap(ComponentPlacement.RELATED, 148, Short.MAX_VALUE)
 					.addComponent(FriendSignature_JLabel)
-					.addContainerGap(259, Short.MAX_VALUE))
+					.addPreferredGap(ComponentPlacement.UNRELATED)
+					.addComponent(FriendIP_TextField, GroupLayout.PREFERRED_SIZE, 145, GroupLayout.PREFERRED_SIZE)
+					.addGap(26)
+					.addComponent(lblFriendPort)
+					.addPreferredGap(ComponentPlacement.UNRELATED)
+					.addComponent(FriendPort_TextField, GroupLayout.PREFERRED_SIZE, 76, GroupLayout.PREFERRED_SIZE)
+					.addGap(31))
 		);
 		gl_panel_2.setVerticalGroup(
 			gl_panel_2.createParallelGroup(Alignment.TRAILING)
@@ -113,28 +157,19 @@ public class ChatBox_JFrame extends JFrame
 					.addContainerGap(17, Short.MAX_VALUE)
 					.addGroup(gl_panel_2.createParallelGroup(Alignment.BASELINE)
 						.addComponent(FriendName_JLabel)
-						.addComponent(FriendSignature_JLabel))
+						.addComponent(lblFriendPort)
+						.addComponent(FriendIP_TextField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+						.addComponent(FriendSignature_JLabel)
+						.addComponent(FriendPort_TextField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
 					.addGap(23))
 		);
 		panel_2.setLayout(gl_panel_2);
+		panel_1.setLayout(null);
 		
 		JLabel FriendPortrait_JLabel = new JLabel("");
+		FriendPortrait_JLabel.setBounds(0, 0, 75, 64);
 		FriendPortrait_JLabel.setIcon(new ImageIcon(ChatBox_JFrame.class.getResource("/Icon/The portrait.png")));
-		GroupLayout gl_panel_1 = new GroupLayout(panel_1);
-		gl_panel_1.setHorizontalGroup(
-			gl_panel_1.createParallelGroup(Alignment.TRAILING)
-				.addGroup(Alignment.LEADING, gl_panel_1.createSequentialGroup()
-					.addContainerGap()
-					.addComponent(FriendPortrait_JLabel)
-					.addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-		);
-		gl_panel_1.setVerticalGroup(
-			gl_panel_1.createParallelGroup(Alignment.TRAILING)
-				.addGroup(gl_panel_1.createSequentialGroup()
-					.addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-					.addComponent(FriendPortrait_JLabel, GroupLayout.PREFERRED_SIZE, 54, GroupLayout.PREFERRED_SIZE))
-		);
-		panel_1.setLayout(gl_panel_1);
+		panel_1.add(FriendPortrait_JLabel);
 		FriendPersonalInformation_Panel.setLayout(gl_FriendPersonalInformation_Panel);
 		
 		JSplitPane AllChatBox_SplitPane = new JSplitPane();
@@ -149,32 +184,61 @@ public class ChatBox_JFrame extends JFrame
 		JPanel Reset_Vibration_Send_Panel = new JPanel();
 		
 		JButton SendInformation_JButton = new JButton("Send");
+		SendInformation_JButton.addActionListener(new ActionListener() 
+		{
+			public void actionPerformed(ActionEvent e) 
+			{
+				Function_SendMessage(e);
+			}
+		});
 		SendInformation_JButton.setFont(new Font("Consolas", Font.PLAIN, 12));
 		
 		JButton ResetInformation_JButton = new JButton("Reset");
+		ResetInformation_JButton.addActionListener(new ActionListener() 
+		{
+			public void actionPerformed(ActionEvent e)
+			{
+				Function_ClearChatBoxInfo(e);
+			}
+		});
 		ResetInformation_JButton.setFont(new Font("Consolas", Font.PLAIN, 12));
 		
 		JButton Vibration_JButton = new JButton("Vibration");
 		Vibration_JButton.setFont(new Font("Consolas", Font.PLAIN, 12));
+		
+		JLabel lblMyPort = new JLabel("Monitoring status");
+		lblMyPort.setFont(new Font("Consolas", Font.PLAIN, 12));
+		
+		MonitoringStatu_JLabel = new JLabel("----------");
+		MonitoringStatu_JLabel.setFont(new Font("Consolas", Font.BOLD, 14));
+		MonitoringStatu_JLabel.setForeground(Color.BLUE);
+		MonitoringStatu_JLabel.setBackground(new Color(0, 0, 255));
 		GroupLayout gl_Reset_Vibration_Send_Panel = new GroupLayout(Reset_Vibration_Send_Panel);
 		gl_Reset_Vibration_Send_Panel.setHorizontalGroup(
 			gl_Reset_Vibration_Send_Panel.createParallelGroup(Alignment.TRAILING)
 				.addGroup(gl_Reset_Vibration_Send_Panel.createSequentialGroup()
-					.addContainerGap(594, Short.MAX_VALUE)
+					.addGap(18)
+					.addComponent(lblMyPort)
+					.addGap(18)
+					.addComponent(MonitoringStatu_JLabel)
+					.addPreferredGap(ComponentPlacement.RELATED, 348, Short.MAX_VALUE)
 					.addComponent(ResetInformation_JButton)
-					.addGap(10)
+					.addGap(18)
 					.addComponent(Vibration_JButton)
-					.addPreferredGap(ComponentPlacement.UNRELATED)
+					.addGap(21)
 					.addComponent(SendInformation_JButton)
-					.addGap(41))
+					.addGap(22))
 		);
 		gl_Reset_Vibration_Send_Panel.setVerticalGroup(
 			gl_Reset_Vibration_Send_Panel.createParallelGroup(Alignment.LEADING)
 				.addGroup(gl_Reset_Vibration_Send_Panel.createSequentialGroup()
+					.addContainerGap()
 					.addGroup(gl_Reset_Vibration_Send_Panel.createParallelGroup(Alignment.BASELINE)
+						.addComponent(lblMyPort)
 						.addComponent(ResetInformation_JButton)
 						.addComponent(SendInformation_JButton)
-						.addComponent(Vibration_JButton))
+						.addComponent(Vibration_JButton)
+						.addComponent(MonitoringStatu_JLabel))
 					.addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
 		);
 		Reset_Vibration_Send_Panel.setLayout(gl_Reset_Vibration_Send_Panel);
@@ -206,28 +270,29 @@ public class ChatBox_JFrame extends JFrame
 		GroupLayout gl_MyChat_Panel = new GroupLayout(MyChat_Panel);
 		gl_MyChat_Panel.setHorizontalGroup(
 			gl_MyChat_Panel.createParallelGroup(Alignment.LEADING)
-				.addComponent(Reset_Vibration_Send_Panel, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
 				.addGroup(gl_MyChat_Panel.createSequentialGroup()
 					.addGroup(gl_MyChat_Panel.createParallelGroup(Alignment.TRAILING)
 						.addGroup(gl_MyChat_Panel.createSequentialGroup()
 							.addComponent(ChatJMenuBar_Panel, GroupLayout.PREFERRED_SIZE, 857, GroupLayout.PREFERRED_SIZE)
 							.addGap(18))
 						.addGroup(gl_MyChat_Panel.createSequentialGroup()
-							.addComponent(SendInformation_JScrollPane, GroupLayout.PREFERRED_SIZE, 855, GroupLayout.PREFERRED_SIZE)
+							.addGroup(gl_MyChat_Panel.createParallelGroup(Alignment.TRAILING, false)
+								.addComponent(Reset_Vibration_Send_Panel, Alignment.LEADING, 0, 0, Short.MAX_VALUE)
+								.addComponent(SendInformation_JScrollPane, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 855, Short.MAX_VALUE))
 							.addGap(20)))
-					.addGap(2))
+					.addGap(5))
 		);
 		gl_MyChat_Panel.setVerticalGroup(
 			gl_MyChat_Panel.createParallelGroup(Alignment.LEADING)
 				.addGroup(gl_MyChat_Panel.createSequentialGroup()
 					.addComponent(ChatJMenuBar_Panel, GroupLayout.PREFERRED_SIZE, 24, GroupLayout.PREFERRED_SIZE)
 					.addGap(18)
-					.addComponent(SendInformation_JScrollPane, GroupLayout.DEFAULT_SIZE, 111, Short.MAX_VALUE)
+					.addComponent(SendInformation_JScrollPane, GroupLayout.DEFAULT_SIZE, 98, Short.MAX_VALUE)
 					.addPreferredGap(ComponentPlacement.RELATED)
 					.addComponent(Reset_Vibration_Send_Panel, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
 		);
 		
-		JTextArea SendInformation_TextArea = new JTextArea();
+		SendInformation_TextArea = new JTextArea();
 		SendInformation_TextArea.setLineWrap(true);
 		SendInformation_JScrollPane.setViewportView(SendInformation_TextArea);
 		MyChat_Panel.setLayout(gl_MyChat_Panel);
@@ -235,9 +300,168 @@ public class ChatBox_JFrame extends JFrame
 		JScrollPane ChatInformation_JScrollPane = new JScrollPane();
 		AllChatBox_SplitPane.setLeftComponent(ChatInformation_JScrollPane);
 		
-		JTextArea ChatInformation_TextArea = new JTextArea();
+		ChatInformation_TextArea = new JTextArea();
 		ChatInformation_TextArea.setLineWrap(true);
 		ChatInformation_JScrollPane.setViewportView(ChatInformation_TextArea);
-		AllChatBox_SplitPane.setDividerLocation(280);
+		AllChatBox_SplitPane.setDividerLocation(235);
+		
+		/*------------------------------------------------
+		 * Strat the DatagramSocket(Receive the message) |
+		 *------------------------------------------------
+		 */
+		Initialize_Socket();
+	}
+	
+	/**
+	 * 
+	 * @Title Initialize
+	 * @Description 
+	 * @param no
+	 * @return void
+	 * @date Jan 2, 2019-9:22:14 PM
+	 * @throws no
+	 *
+	 */
+	public void Initialize_Socket()
+	{
+		int port ;
+		while(true)
+		{
+			if(datagramSocket!=null&&!datagramSocket.isClosed())
+			{
+				datagramSocket.isClosed();
+			}
+			port = Integer.parseInt(JOptionPane.showInputDialog(this,"Please enter the port : ","Port",JOptionPane.QUESTION_MESSAGE));
+			if(port<1||port>65535)
+			{
+				JOptionPane.showMessageDialog(this, "Port number out of range ! (1-65535)", "Tip", JOptionPane.WARNING_MESSAGE);
+				return;
+				//throw new RuntimeException("Port number out of range !");
+			}
+			
+			/*
+			 * Start the 'DatagramSocket'
+			 */
+			try
+			{
+				datagramSocket = new DatagramSocket(port);
+				/*
+				 * Receive the message
+				 */
+				Function_StartListen();
+				//Change the listening status.
+				MonitoringStatu_JLabel.setText("Listening port : "+port);
+				break;
+				
+			} catch (SocketException e)
+			{
+				JOptionPane.showMessageDialog(this, "The port is already occupied !", "Error", JOptionPane.ERROR_MESSAGE);
+				e.printStackTrace();
+			}
+		}
+	}
+	
+	/**
+	 * 
+	 * @Title Function(Thread)
+	 * @Description Receive the message
+	 * @param no
+	 * @return void
+	 * @date Jan 2, 2019-9:43:53 PM
+	 * @throws no
+	 *
+	 */
+	public void Function_StartListen()
+	{
+		new Thread()
+		{
+			private DatagramPacket datagramPacket;
+			@Override
+			public void run()
+			{
+				byte[] message = new byte[1024];
+				datagramPacket = new DatagramPacket(message, message.length);
+				while(!datagramSocket.isClosed())
+				{
+					try
+					{
+						datagramSocket.receive(datagramPacket);
+						//Add the message to the chat box.
+						ChatInformation_TextArea.append(datagramPacket.getAddress().getHostAddress()+"send a message as follow : \n"
+								+new String(datagramPacket.getData(),0,datagramPacket.getLength())+"\n");
+						//Let the scroll bar to the bottom.
+						ChatInformation_TextArea.setCaretPosition(ChatInformation_TextArea.getText().length());
+					} catch (IOException e)
+					{
+						//JOptionPane.showMessageDialog(this, "Fail to receive the message !", "Error", JOptionPane.MESSAGE_PROPERTY);
+						e.printStackTrace();
+					}
+				}
+			}
+		}.start();
+	}
+	
+	
+
+	/**
+	 * 
+	 * @Title Function
+	 * @Description Clear the information in chat box.
+	 * @param Performed action
+	 * @return void
+	 * @date Jan 2, 2019-9:16:01 PM
+	 * @throws no
+	 *
+	 */
+	protected void Function_ClearChatBoxInfo(ActionEvent e)
+	{
+		ChatInformation_TextArea.setText("");
+	}
+
+	/**
+	 * 
+	 * @Title Function
+	 * @Description Send the message to your friend.
+	 * @param Performed action
+	 * @return void
+	 * @date Jan 2, 2019-8:26:10 PM
+	 * @throws no
+	 *
+	 */
+	protected void Function_SendMessage(ActionEvent e)
+	{
+		String friend_IPAdress = FriendIP_TextField.getText();
+		String friend_RemotePort = FriendPort_TextField.getText();
+		if(friend_IPAdress==null||friend_RemotePort==null||friend_IPAdress.trim().equals("")||friend_RemotePort.trim().equals(""))
+		{
+			JOptionPane.showMessageDialog(ChatBox_JFrame.this, "Please enter the IP address or port !");
+			return;
+		}
+		/*
+		 *   ? ? ?
+		 */
+		if(datagramSocket==null||datagramSocket.isClosed())
+		{
+			JOptionPane.showMessageDialog(this, "Listening failed !", "Warning", JOptionPane.WARNING_MESSAGE);
+			return;
+		}
+		//Get the data you want to send.
+		String sendMessage = SendInformation_TextArea.getText();
+		//Store the data.
+		byte data[] = sendMessage.getBytes();
+		//Display the message to the chat box if you send it to your friend.
+		ChatInformation_TextArea.append("I send the message to : "+friend_IPAdress+"-"+FriendPort_TextField+"\n"+SendInformation_TextArea.getText().toString()+"\n\n");
+		//Let the scroll bar to the bottom.
+		ChatInformation_TextArea.setCaretPosition(ChatInformation_TextArea.getText().length());
+		//Send the message.
+		try
+		{
+			datagramSocket.send(new DatagramPacket(data, data.length,InetAddress.getByName(friend_IPAdress),Integer.parseInt(friend_RemotePort)));
+			SendInformation_TextArea.setText("");
+		} catch (NumberFormatException | IOException e1)
+		{
+			JOptionPane.showMessageDialog(this, "Fail to send the message !", "Error", JOptionPane.WARNING_MESSAGE);
+			e1.printStackTrace();
+		}	
 	}
 }

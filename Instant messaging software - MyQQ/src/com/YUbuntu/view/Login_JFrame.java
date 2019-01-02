@@ -10,12 +10,14 @@ import javax.swing.GroupLayout.Alignment;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 import javax.swing.LayoutStyle.ComponentPlacement;
 import javax.swing.border.EmptyBorder;
 
+import com.HuangYuhui.DaoImpl.ManageUserInfoImpl;
 import com.YUbuntu.view.function.Login_JFrame_function;
 
 /**
@@ -81,6 +83,12 @@ public class Login_JFrame extends JFrame implements Login_JFrame_function
 		lblPassword.setFont(new Font("Consolas", Font.PLAIN, 13));
 		
 		Login_JButton = new JButton("Login");
+		Login_JButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) 
+			{
+				Function_CheckUserInfo(e);
+			}
+		});
 		Login_JButton.setFont(new Font("Consolas", Font.PLAIN, 12));
 		
 		Register_JButton = new JButton("Register");
@@ -138,6 +146,37 @@ public class Login_JFrame extends JFrame implements Login_JFrame_function
 		contentPane.setLayout(gl_contentPane);
 	}
 	
+	
+	/**
+	 * 
+	 * @Title Function
+	 * @Description Check the user information from the specified file.
+	 * @param Performed action
+	 * @return void
+	 * @date Jan 2, 2019-1:35:49 PM
+	 * @throws no
+	 *
+	 */
+	protected void Function_CheckUserInfo(ActionEvent e)
+	{
+		String userName = UserName_TextField.getText();
+		String userPassword = UserPassword_PasswordField.getText();
+		//Check the user information.
+		boolean flag = new ManageUserInfoImpl().IsLoginIn(userName, userPassword);
+		if(flag)//if true
+		{
+			JOptionPane.showMessageDialog(this, "Success to login in !", "Wecomle", JOptionPane.INFORMATION_MESSAGE);
+			//Pop the main interface.
+			new FriendsList_JFrame().setVisible(true);
+			//dispose the login interface.
+			Login_JFrame.this.dispose();
+		}
+		else
+		{
+			JOptionPane.showMessageDialog(this, "Fail to login in !", "Sorry", JOptionPane.WARNING_MESSAGE);
+		}
+	}
+
 	/**
 	 * 
 	 * @Title Function

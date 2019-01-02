@@ -65,7 +65,7 @@ public class FriendsList_JFrame extends JFrame implements FriendsList_JFrame_fun
 		setResizable(false);
 		setTitle("\u6625\u6696\u82B1\u5F00\uFF0C\u71D5\u5B50\u5F52\u6765~");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 322, 646);
+		setBounds(100, 100, 302, 646);
 		
 		JMenuBar Function_JMenuBar = new JMenuBar();
 		setJMenuBar(Function_JMenuBar);
@@ -120,13 +120,13 @@ public class FriendsList_JFrame extends JFrame implements FriendsList_JFrame_fun
 		gl_contentPane.setHorizontalGroup(
 			gl_contentPane.createParallelGroup(Alignment.LEADING)
 				.addGroup(gl_contentPane.createSequentialGroup()
-					.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
+					.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING, false)
 						.addGroup(gl_contentPane.createSequentialGroup()
 							.addComponent(panel, GroupLayout.PREFERRED_SIZE, 92, GroupLayout.PREFERRED_SIZE)
 							.addPreferredGap(ComponentPlacement.RELATED)
-							.addComponent(panel_1, GroupLayout.PREFERRED_SIZE, 199, GroupLayout.PREFERRED_SIZE))
-						.addComponent(tabbedPane, GroupLayout.PREFERRED_SIZE, 294, GroupLayout.PREFERRED_SIZE))
-					.addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+							.addComponent(panel_1, 0, 0, Short.MAX_VALUE))
+						.addComponent(tabbedPane, GroupLayout.PREFERRED_SIZE, 274, GroupLayout.PREFERRED_SIZE))
+					.addContainerGap(22, Short.MAX_VALUE))
 		);
 		gl_contentPane.setVerticalGroup(
 			gl_contentPane.createParallelGroup(Alignment.LEADING)
@@ -150,16 +150,15 @@ public class FriendsList_JFrame extends JFrame implements FriendsList_JFrame_fun
 		FriendsList_ScrollPane.setViewportView(new Firends_JPanel());
 		
 		GroupLayout gl_FriendsList_JPanel = new GroupLayout(FriendsList_JPanel);
-
 		gl_FriendsList_JPanel.setHorizontalGroup(
 			gl_FriendsList_JPanel.createParallelGroup(Alignment.LEADING)
-				.addComponent(FriendsList_ScrollPane, GroupLayout.DEFAULT_SIZE, 289, Short.MAX_VALUE)
+				.addGroup(gl_FriendsList_JPanel.createSequentialGroup()
+					.addComponent(FriendsList_ScrollPane, GroupLayout.PREFERRED_SIZE, 277, GroupLayout.PREFERRED_SIZE)
+					.addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
 		);
 		gl_FriendsList_JPanel.setVerticalGroup(
 			gl_FriendsList_JPanel.createParallelGroup(Alignment.LEADING)
-				.addGroup(gl_FriendsList_JPanel.createSequentialGroup()
-					.addComponent(FriendsList_ScrollPane, GroupLayout.PREFERRED_SIZE, 448, GroupLayout.PREFERRED_SIZE)
-					.addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+				.addComponent(FriendsList_ScrollPane, Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, 450, Short.MAX_VALUE)
 		);
 		FriendsList_JPanel.setLayout(gl_FriendsList_JPanel);
 				
@@ -182,7 +181,7 @@ public class FriendsList_JFrame extends JFrame implements FriendsList_JFrame_fun
 		lblyubuntu.setFont(new Font("Consolas", Font.PLAIN, 18));
 		
 		JLabel lblHttpsyubuntugithubio = new JLabel("https://YUbuntu0109.github.io/");
-		lblHttpsyubuntugithubio.setFont(new Font("Consolas", Font.PLAIN, 10));
+		lblHttpsyubuntugithubio.setFont(new Font("Consolas", Font.PLAIN, 9));
 		GroupLayout gl_panel_1 = new GroupLayout(panel_1);
 		gl_panel_1.setHorizontalGroup(
 			gl_panel_1.createParallelGroup(Alignment.LEADING)

@@ -26,7 +26,7 @@ public class ManageUserInfoImpl implements ManageUserInfo
 	/*
 	 * Create a file firstly before the user login in.
 	 */
-	private static File file = new File("E:\\GitHub\\Workbench-Eclipse+GitHub\\Instant_messaging_software-MyQQ\\Instant messaging software - MyQQ\\Source\\UserInfo.txt");	
+	private static File file = new File("Source\\UserInfo.txt");	
 	static
 	{
 		try
@@ -57,7 +57,7 @@ public class ManageUserInfoImpl implements ManageUserInfo
 
 			while ((line = bufferedReader.readLine()) != null)
 			{
-				// µ÷ÓÃsplit()·½·¨,½«¶ÁÈ¡µÄÄÚÈİ·Ö¸îÎª¶ş,ÔÙÍ¨¹ı×Ô¶¨ÒåÊı×é·Ö±ğ´æ´¢
+				// è°ƒç”¨split()æ–¹æ³•,å°†è¯»å–çš„å†…å®¹åˆ†å‰²ä¸ºäºŒ,å†é€šè¿‡è‡ªå®šä¹‰æ•°ç»„åˆ†åˆ«å­˜å‚¨
 				String[] UserInfo = line.split("=");
 				if (UserInfo[0].equals(userName) && UserInfo[1].equals(userPassword))
 				{

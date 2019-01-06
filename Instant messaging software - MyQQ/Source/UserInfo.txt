@@ -1,3 +1,4 @@
 YUbuntu0109=aaa
 
 AAA=BBB
+Â³Ïþ½Ü=123456

@@ -270,6 +270,16 @@ public class ChatBox_JFrame extends JFrame implements ChatBox_JFrame_function
 		SendFile_JMenu.setFont(new Font("Consolas", Font.PLAIN, 12));
 		ChatFuntion_JMenuBar.add(SendFile_JMenu);
 		
+		JMenuItem mntmSendFile = new JMenuItem("Send file");
+		mntmSendFile.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) 
+			{
+				Function_SendFile(e);
+			}
+		});
+		mntmSendFile.setFont(new Font("Consolas", Font.PLAIN, 12));
+		SendFile_JMenu.add(mntmSendFile);
+		
 		JScrollPane SendInformation_JScrollPane = new JScrollPane();
 		GroupLayout gl_MyChat_Panel = new GroupLayout(MyChat_Panel);
 		gl_MyChat_Panel.setHorizontalGroup(
@@ -320,6 +330,24 @@ public class ChatBox_JFrame extends JFrame implements ChatBox_JFrame_function
 	
 	/**
 	 * 
+	 * @Title Function 
+	 * @Description Send the specified file to your friend.
+	 * @param Performed action
+	 * @return void
+	 * @date 2019年1月6日下午10:01:58
+	 * @throws no
+	 *
+	 */
+	protected void Function_SendFile(ActionEvent e)
+	{
+		String filePath = new FileChooser_JFrame().getFilePath();
+		//Test
+		System.out.println(filePath);
+	}
+
+
+	/**
+	 * 
 	 * @Title Function
 	 * @Description Message prompt tone.
 	 * @param no
@@ -330,9 +358,6 @@ public class ChatBox_JFrame extends JFrame implements ChatBox_JFrame_function
 	 */
 	public void Function_ReceiveMessagePromptMusic()
 	{
-		/*
-		 * 
-		 */
 		new Thread()
 		{
 			@Override
@@ -440,8 +465,6 @@ public class ChatBox_JFrame extends JFrame implements ChatBox_JFrame_function
 		}.start();
 	}
 	
-	
-
 	/**
 	 * 
 	 * @Title Function

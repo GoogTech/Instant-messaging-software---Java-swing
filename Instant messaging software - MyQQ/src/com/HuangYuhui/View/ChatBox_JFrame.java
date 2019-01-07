@@ -266,7 +266,7 @@ public class ChatBox_JFrame extends JFrame implements ChatBox_JFrame_function
 		ExpressionPackage_JMenu.setFont(new Font("Consolas", Font.PLAIN, 12));
 		ChatFuntion_JMenuBar.add(ExpressionPackage_JMenu);
 		
-		JMenu SendFile_JMenu = new JMenu("Send files");
+		JMenu SendFile_JMenu = new JMenu("File");
 		SendFile_JMenu.setFont(new Font("Consolas", Font.PLAIN, 12));
 		ChatFuntion_JMenuBar.add(SendFile_JMenu);
 		
@@ -277,6 +277,16 @@ public class ChatBox_JFrame extends JFrame implements ChatBox_JFrame_function
 				Function_SendFile(e);
 			}
 		});
+		
+		JMenuItem mntmReceiveFile = new JMenuItem("Receive file");
+		mntmReceiveFile.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) 
+			{
+				Function_ReceiveFile(e);
+			}
+		});
+		mntmReceiveFile.setFont(new Font("Consolas", Font.PLAIN, 12));
+		SendFile_JMenu.add(mntmReceiveFile);
 		mntmSendFile.setFont(new Font("Consolas", Font.PLAIN, 12));
 		SendFile_JMenu.add(mntmSendFile);
 		
@@ -328,6 +338,22 @@ public class ChatBox_JFrame extends JFrame implements ChatBox_JFrame_function
 		Initialize_Socket();
 	}
 	
+	/**
+	 * 
+	 * @Title Function
+	 * @Description Create a new Thread to open the 'ServerSocket' for receiving the file.
+	 * @param Performed action
+	 * @return void
+	 * @date 2019年1月7日上午11:56:16
+	 * @throws no
+	 *
+	 */
+	protected void Function_ReceiveFile(ActionEvent e)
+	{
+		
+	}
+
+
 	/**
 	 * 
 	 * @Title Function 
